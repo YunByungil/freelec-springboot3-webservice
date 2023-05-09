@@ -16,6 +16,10 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok' // 롬복 추가
 
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa' // Spring Data Jpa 추상화 라이브러리
+	runtimeOnly 'com.h2database:h2' // 인메모리 관계형 데이터베이스
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
