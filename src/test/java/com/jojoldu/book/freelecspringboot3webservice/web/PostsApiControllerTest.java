@@ -3,6 +3,7 @@ package com.jojoldu.book.freelecspringboot3webservice.web;
 import com.jojoldu.book.freelecspringboot3webservice.domain.posts.Posts;
 import com.jojoldu.book.freelecspringboot3webservice.domain.posts.PostsRepository;
 import com.jojoldu.book.freelecspringboot3webservice.web.dto.PostsSaveRequestDto;
+import com.jojoldu.book.freelecspringboot3webservice.web.dto.PostsUpdateRequestDto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -61,5 +64,47 @@ class PostsApiControllerTest {
         List<Posts> all = postsRepository.findAll();
         assertThat(all.get(0).getTitle()).isEqualTo(title);
         assertThat(all.get(0).getContent()).isEqualTo(content);
+    }
+
+    @DisplayName("게시글 수정된다")
+    @Test
+    void updatePost() {
+        // given
+        Posts savedPosts = postsRepository.save(Posts.builder()
+                .title("title")
+                .content("content")
+                .author("author")
+                .build());
+        Long updateId = savedPosts.getId();
+        String expectedTitle = "title2";
+        String expectedContent = "content2";
+
+        PostsUpdateRequestDto requestDto = PostsUpdateRequestDto.builder()
+                .title(expectedTitle)
+                .content(expectedContent)
+                .build();
+
+        String url = "http://localhost:" + port + "/api/v1/posts/" + updateId;
+
+        HttpEntity<PostsUpdateRequestDto> requestEntity = new HttpEntity<>(requestDto);
+
+        // when
+        System.out.println("\"requestEntity\" = " + "requestEntity");
+        ResponseEntity<Long> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, requestEntity, Long.class);
+
+        // then
+        System.out.println("\"222\" = " + "222");
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+
+        System.out.println("\"333\" = " + "333");
+        assertThat(responseEntity.getBody()).isGreaterThan(0L);
+
+        List<Posts> all = postsRepository.findAll();
+
+        System.out.println("\"444\" = " + "444");
+        assertThat(all.get(0).getTitle()).isEqualTo(expectedTitle);
+
+        System.out.println("\"555\" = " + "555");
+        assertThat(all.get(0).getContent()).isEqualTo(expectedContent);
     }
 }
