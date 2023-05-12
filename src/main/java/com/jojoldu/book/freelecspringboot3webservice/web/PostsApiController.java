@@ -1,5 +1,7 @@
 package com.jojoldu.book.freelecspringboot3webservice.web;
 
+import com.jojoldu.book.freelecspringboot3webservice.service.PostsService;
+import com.jojoldu.book.freelecspringboot3webservice.web.dto.PostsSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
