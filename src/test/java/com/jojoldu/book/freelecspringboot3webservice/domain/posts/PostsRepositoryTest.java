@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -70,6 +71,24 @@ class PostsRepositoryTest {
         System.out.println(">>>>>>>>>> createDate = " + posts.getCreatedDate() + ", modifiedDate = " + posts.getModifiedDate());
         assertThat(posts.getCreatedDate()).isAfter(now);
         assertThat(posts.getModifiedDate()).isAfter(now);
+    }
+
+    @DisplayName("게시글 수정하기")
+    @Test
+    void updatePosts() {
+        // given
+        Posts id = postsRepository.save(Posts.builder()
+                .title("title")
+                .content("content")
+                .author("author")
+                .build());
+        Posts findPosts = postsRepository.findById(id.getId()).get();
+
+        // when
+        findPosts.update("title2", "content2");
+
+        // then
+        assertThat(findPosts.getTitle()).isEqualTo("title2");
     }
 
 }
