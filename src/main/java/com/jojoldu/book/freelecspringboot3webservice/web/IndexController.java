@@ -1,5 +1,6 @@
 package com.jojoldu.book.freelecspringboot3webservice.web;
 
+import com.jojoldu.book.freelecspringboot3webservice.config.auth.LoginUser;
 import com.jojoldu.book.freelecspringboot3webservice.config.auth.dto.SessionUser;
 import com.jojoldu.book.freelecspringboot3webservice.service.PostsService;
 import com.jojoldu.book.freelecspringboot3webservice.web.dto.PostsResponseDto;
@@ -17,10 +18,10 @@ public class IndexController {
     private final PostsService postsService;
     private final HttpSession httpSession;
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(Model model, @LoginUser SessionUser user) {
         model.addAttribute("posts", postsService.findAllDesc());
 
-        SessionUser user = (SessionUser) httpSession.getAttribute("user"); // 1.
+//        SessionUser user = (SessionUser) httpSession.getAttribute("user"); // 1.
 
         if (user != null) { // 2.
             model.addAttribute("userName", user.getName());
