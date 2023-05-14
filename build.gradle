@@ -18,6 +18,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf' // 타임리프
 	implementation 'org.springframework.boot:spring-boot-starter-mustache' // 머스타치
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client' // 소셜 로그인 의존성
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa' // Spring Data Jpa 추상화 라이브러리
 	runtimeOnly 'com.h2database:h2' // 인메모리 관계형 데이터베이스
