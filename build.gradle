@@ -25,6 +25,7 @@ dependencies {
 	runtimeOnly 'com.h2database:h2' // 인메모리 관계형 데이터베이스
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test' // 테스트 전용 시큐리티
 }
 
 tasks.named('test') {

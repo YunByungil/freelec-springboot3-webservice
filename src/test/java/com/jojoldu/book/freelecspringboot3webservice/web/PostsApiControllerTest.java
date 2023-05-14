@@ -16,6 +16,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.test.context.support.WithMockUser;
 
 import java.util.List;
 
@@ -41,6 +42,7 @@ class PostsApiControllerTest {
 
     @DisplayName("게시글 등록된다")
     @Test
+    @WithMockUser(roles = "USER") // 1. 인증된 모의 사용자를 만들어서 사용, roles에 권한 추가
     void addPosts() {
         // given
         String title = "title";
