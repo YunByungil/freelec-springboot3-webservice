@@ -14,10 +14,13 @@ repositories {
 
 dependencies {
 	compileOnly 'org.projectlombok:lombok' // 롬복 추가
+	annotationProcessor 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
 
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf' // 타임리프
 	implementation 'org.springframework.boot:spring-boot-starter-mustache' // 머스타치
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-security' // 시큐리티
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client' // 소셜 로그인 의존성
 	implementation 'org.springframework.session:spring-session-jdbc' // jdbc 의존 properties 같이 수정
 
